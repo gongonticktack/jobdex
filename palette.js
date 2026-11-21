@@ -5,7 +5,8 @@
  * 配色は Color Hunt の4色パレットを CSS変数へ適用して駆動する。
  * パレット順の比重イメージは メイン41% / サブ26% / ライト18% / アクセント15%
  * （ページ上部のストライプとドロップダウン内のミニバー）。
- * 選択はその訪問中だけ有効で、アクセスごとにランダムで1つ選ぶ（保存・復元はしない）。
+ * 選択はその訪問中だけ有効で、sessionStorageでアプリ内移動に引き継ぐ。
+ * ランダムに選び直すのは新規アクセスとTOP画面のリロードのときだけ。
  * JobDex はダークテーマ専用デザインのため、全パレットをダーク基調で構成し、
  * テキストとのコントラスト比 4.5:1 以上を保つ。
  */
@@ -237,8 +238,9 @@ function initPalette() {
     button.setAttribute("aria-expanded", "true");
   }
 
-  // 選択はその訪問中だけ有効（保存・復元はしない）
+  // 選択はその訪問中だけ有効（sessionStorageでアプリ内移動に引き継ぐ）
   function selectPalette(index) {
+    try { sessionStorage.setItem('appPaletteIndex', String(index)); } catch (e) {}
     const palette = PALETTES[index];
     applyPalette(palette);
     [...buttonSwatch.children].forEach((seg, i) => {
@@ -285,8 +287,20 @@ function initPalette() {
     }
   });
 
-  // アクセスごとにランダムで1つ選ぶ（前回の選択は保存・復元しない）
-  selectPalette(Math.floor(Math.random() * PALETTES.length));
+  // ランダムに選び直すのは新規アクセスとTOP画面のリロードのときだけ。
+  // アプリ内移動では sessionStorage の選択を引き継ぐ。
+  const isTopPage = location.pathname === '/' || /(^|\/)index\.html$/.test(location.pathname);
+  const navEntry = performance.getEntriesByType('navigation')[0];
+  const navType = navEntry ? navEntry.type : 'navigate';
+  const fromSameApp = !!document.referrer && document.referrer.startsWith(location.origin);
+  let savedPalette = null;
+  try { savedPalette = sessionStorage.getItem('appPaletteIndex'); } catch (e) {}
+  if (isTopPage && (navType === 'reload' || !fromSameApp)) savedPalette = null;
+  const savedIndex = savedPalette === null ? NaN : parseInt(savedPalette, 10);
+  const initialIndex = (Number.isInteger(savedIndex) && savedIndex >= 0 && savedIndex < PALETTES.length)
+    ? savedIndex
+    : Math.floor(Math.random() * PALETTES.length);
+  selectPalette(initialIndex);
 }
 
 // このスクリプトは </body> 直前で読み込まれるため、ヘッダーのDOMは構築済み
