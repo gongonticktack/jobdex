@@ -1,7 +1,9 @@
 *
 !index.html
+!stats.html
 !styles.css
 !app.js
+!stats.js
 !crawler.js
 !company-parsers.js
 !job_icon.png

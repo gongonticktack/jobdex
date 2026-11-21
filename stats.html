@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>統計 | Talent Market Intelligence</title>
+    <link rel="icon" type="image/png" href="job_icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <h1>TMI</h1>
+        <p>Talent Market Intelligence</p>
+      </div>
+      <div class="header-actions">
+        <nav class="tabs" aria-label="ページ切り替え">
+          <a class="tab" href="index.html">求人一覧</a>
+          <a class="tab is-active" href="stats.html" aria-current="page">統計</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="page-intro">
+        <div>
+          <h2>統計・トレンド</h2>
+          <p>職種・スキル・資格ごとに、求められている求人の件数と月別の変化を表示します（登録日ベース）。</p>
+        </div>
+        <a class="ghost-button stats-back" href="index.html">← 求人一覧に戻る</a>
+      </div>
+
+      <div id="statsStatus" class="status stats-status" role="status">集計中…</div>
+
+      <div class="metric-grid">
+        <article class="metric">
+          <span>求人総数</span>
+          <strong id="totalJobs">-</strong>
+        </article>
+        <article class="metric">
+          <span>集計期間</span>
+          <strong id="statsPeriod" class="metric-small">-</strong>
+        </article>
+        <article class="metric">
+          <span>資格指定あり求人</span>
+          <strong id="certCoverageMetric" class="metric-small">-</strong>
+        </article>
+        <article class="metric">
+          <span>必須スキルの種類</span>
+          <strong id="skillKinds">-</strong>
+        </article>
+      </div>
+
+      <div class="stats-stack">
+        <section class="panel stats-panel">
+          <div class="panel-head">
+            <h2>職種カテゴリ</h2>
+          </div>
+          <h3 class="stats-subtitle">カテゴリ別 求人件数</h3>
+          <div id="categoryBars" class="chart-box empty">データがありません</div>
+          <h3 class="stats-subtitle">月別推移（上位5カテゴリ）</h3>
+          <div id="categoryLines" class="chart-box empty">データがありません</div>
+          <p id="categoryNote" class="stats-note"></p>
+        </section>
+
+        <section class="panel stats-panel">
+          <div class="panel-head">
+            <h2>スキル</h2>
+            <div class="panel-actions">
+              <select id="skillTypeSelect" aria-label="スキル種別">
+                <option value="required">必須スキル</option>
+                <option value="preferred">歓迎スキル</option>
+              </select>
+            </div>
+          </div>
+          <h3 class="stats-subtitle">スキル別 求人件数（上位15）</h3>
+          <div id="skillBars" class="chart-box empty">データがありません</div>
+          <h3 class="stats-subtitle">月別推移（上位5スキル）</h3>
+          <div id="skillLines" class="chart-box empty">データがありません</div>
+        </section>
+
+        <section class="panel stats-panel">
+          <div class="panel-head">
+            <h2>資格</h2>
+          </div>
+          <p id="certSummary" class="stats-summary">データがありません</p>
+          <h3 class="stats-subtitle">資格別 求人件数（上位15）</h3>
+          <div id="certBars" class="chart-box empty">データがありません</div>
+          <h3 class="stats-subtitle">月別推移（上位5資格）</h3>
+          <div id="certLines" class="chart-box empty">データがありません</div>
+        </section>
+      </div>
+    </main>
+
+    <script src="company-parsers.js"></script>
+    <script src="stats.js"></script>
+  </body>
+</html>
