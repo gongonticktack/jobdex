@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <div class="palette-stripe" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </div>
     <header class="app-header">
       <div class="brand">
         <h1>TMI</h1>
@@ -21,6 +24,14 @@
           <a class="tab" href="index.html">求人一覧</a>
           <a class="tab is-active" href="stats.html" aria-current="page">統計</a>
         </nav>
+        <div class="palette-dropdown" id="palette-dropdown">
+          <button type="button" class="palette-button" id="palette-button" aria-haspopup="listbox" aria-expanded="false" aria-label="カラーパレット">
+            <span class="palette-swatch" id="palette-button-swatch" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+            <span class="palette-button-name" id="palette-button-name"></span>
+            <span class="palette-caret" aria-hidden="true">▽</span>
+          </button>
+          <ul class="palette-menu" id="palette-menu" role="listbox" aria-label="カラーパレット" hidden></ul>
+        </div>
       </div>
     </header>
 
@@ -96,6 +107,7 @@
     </main>
 
     <script src="company-parsers.js"></script>
+    <script src="palette.js"></script>
     <script src="stats.js"></script>
   </body>
 </html>

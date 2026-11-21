@@ -272,8 +272,11 @@ if (typeof module !== "undefined" && module.exports) {
 
 /* ================= ブラウザ側（描画・取得） ================= */
 if (typeof document !== "undefined") {
-  const SERIES_COLORS = ["#25d6a2", "#51a7ff", "#ffd18a", "#ff8fa3", "#b79cff"];
-  const BAR_COLORS = { category: "#25d6a2", skill: "#51a7ff", certification: "#ffd18a" };
+  // チャートの先頭色はカラーパレット（palette.js が CSS変数へ適用）に連動させる
+  const rootStyle = getComputedStyle(document.documentElement);
+  const themeColor = (name, fallback) => rootStyle.getPropertyValue(name).trim() || fallback;
+  const SERIES_COLORS = [themeColor("--accent", "#25d6a2"), themeColor("--accent-blue", "#51a7ff"), themeColor("--warn", "#ffd18a"), "#ff8fa3", "#b79cff"];
+  const BAR_COLORS = { category: SERIES_COLORS[0], skill: SERIES_COLORS[1], certification: SERIES_COLORS[2] };
   const state = { supabase: null, stats: null };
 
   const els = {
