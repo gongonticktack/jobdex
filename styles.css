@@ -52,7 +52,7 @@ body {
   background:
     radial-gradient(circle at 12% -8%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 30%),
     radial-gradient(circle at 88% 6%, color-mix(in srgb, var(--accent-blue) 18%, transparent), transparent 28%),
-    linear-gradient(180deg, #0a0e15 0%, var(--bg) 42%, #06080c 100%);
+    linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 42%, color-mix(in srgb, var(--bg) 55%, #000000) 100%);
   color: var(--text);
   font-family: "Segoe UI", "Yu Gothic UI", "Meiryo", sans-serif;
 }
