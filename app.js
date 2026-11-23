@@ -272,6 +272,15 @@ function bindEvents() {
     tab.addEventListener("click", () => switchView(tab.dataset.view));
   });
   els.settingsButton.addEventListener("click", () => switchView("settings"));
+  document.querySelectorAll('input[name="addMode"]').forEach((radio) => {
+    radio.addEventListener("change", () => {
+      const paste = document.querySelector('input[name="addMode"][value="paste"]').checked;
+      document.querySelector("#addCrawlPane").hidden = paste;
+      document.querySelector("#addPastePane").hidden = !paste;
+    });
+  });
+  const initialView = ["dashboard", "add", "settings"].includes(location.hash.slice(1)) ? location.hash.slice(1) : "dashboard";
+  if (initialView !== "dashboard") switchView(initialView);
   els.skillTypeFilter.addEventListener("change", render);
   els.searchInput.addEventListener("input", render);
   els.sortMenuButton.addEventListener("click", toggleSortMenu);
@@ -1239,6 +1248,7 @@ async function cleanupAllOrphanSupabaseSkills() {
 }
 
 function switchView(viewId) {
+  history.replaceState(null, "", "#" + viewId);
   els.tabs.forEach((tab) => tab.classList.toggle("is-active", tab.dataset.view === viewId));
   els.settingsButton.classList.toggle("is-active", viewId === "settings");
   els.views.forEach((view) => view.classList.toggle("is-active", view.id === viewId));

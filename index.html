@@ -23,8 +23,7 @@
         <button class="settings-button" data-view="settings" type="button">設定</button>
         <nav class="tabs" aria-label="ページ切り替え">
           <button class="tab is-active" data-view="dashboard">求人一覧</button>
-          <button class="tab" data-view="crawler">求人を取得</button>
-          <button class="tab" data-view="manual">求人を追加</button>
+          <button class="tab" data-view="add">求人を取得・追加</button>
           <a class="tab" href="stats.html">統計</a>
         </nav>
         <div class="palette-dropdown" id="palette-dropdown">
@@ -154,7 +153,15 @@
         </div>
       </section>
 
-      <section id="crawler" class="view">
+      <section id="add" class="view">
+        <section class="panel add-mode-panel">
+          <div class="add-mode-switch" role="radiogroup" aria-label="追加方法">
+            <label><input type="radio" name="addMode" value="crawl" checked> クロール</label>
+            <label><input type="radio" name="addMode" value="paste"> 貼り付け</label>
+          </div>
+        </section>
+
+        <div id="addCrawlPane" class="add-pane">
         <section class="panel crawler-panel">
           <div class="panel-head">
             <h2>求人情報を取得</h2>
@@ -194,9 +201,9 @@
           <h2>抽出結果プレビュー</h2>
           <div id="crawlPreview" class="job-list empty">取得した求人がここに表示されます</div>
         </section>
-      </section>
+        </div>
 
-      <section id="manual" class="view">
+        <div id="addPastePane" class="add-pane" hidden>
         <section class="panel crawler-panel">
           <div class="panel-head">
             <h2>求人票を貼り付け</h2>
@@ -232,6 +239,7 @@
           <div id="manualPreview" class="job-list empty">解析した求人がここに表示されます</div>
           <div id="manualEditor" class="manual-editor" hidden></div>
         </section>
+        </div>
       </section>
 
       <section id="settings" class="view">
