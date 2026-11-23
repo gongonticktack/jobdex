@@ -119,23 +119,23 @@ h2 {
 }
 
 .brand {
-  display: grid;
-  justify-items: center;
-  gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   width: max-content;
   max-width: 100%;
 }
 
 .brand p {
   margin-bottom: 0;
-  text-align: center;
-  color: var(--muted);
+  text-align: left;
+  color: var(--text-strong);
   font-family: "Space Grotesk", "Segoe UI", sans-serif;
-  font-size: clamp(12px, 1.4vw, 16px);
+  font-size: clamp(26px, 3.2vw, 34px);
   font-weight: 700;
   line-height: 1;
   text-transform: none;
-  letter-spacing: 0;
+  letter-spacing: 0.04em;
 }
 
 main {
@@ -1288,7 +1288,7 @@ label {
   }
 
   .brand {
-    justify-items: start;
+    justify-content: flex-start;
   }
 
   .tab {
@@ -1330,12 +1330,12 @@ label {
 
   .brand {
     width: fit-content;
-    gap: 6px;
+    gap: 10px;
   }
 
   .brand p {
-    font-size: 11px;
-    line-height: 1.2;
+    font-size: 24px;
+    line-height: 1.1;
   }
 
   main {
