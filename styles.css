@@ -1486,7 +1486,7 @@ body::before { display: none; }
 .app-header { min-height: 76px; padding: 16px 32px; background: var(--header-bg); }
 .brand { justify-items: start; gap: 6px; }
 .brand h1 { font-size: 38px; text-shadow: none; }
-.brand p { font-size: 10px; font-weight: 500; letter-spacing: .04em; }
+.brand p { font-family: "Great Vibes", cursive; font-size: clamp(38px, 4.4vw, 50px); font-weight: 400; letter-spacing: .01em; line-height: 1.1; padding-top: 6px; }
 .header-actions { display: flex; align-items: center; flex-direction: row-reverse; }
 main { width: min(1540px, calc(100% - 48px)); margin-top: 26px; }
 .page-intro { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
